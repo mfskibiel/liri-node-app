@@ -49,3 +49,40 @@ if (args[0] === "do-what-it-says") {
         };
     });
 }
+
+
+//making my functions
+
+function spotifySong(songName) {
+    spotify.search({ type: 'track', query: songName, limit: 5 }, function (err, data) {
+        if (err) {
+            return console.log("Error occured: " + error);
+        }
+        data.tracks.items.forEach(function (element) {
+            console.log("");
+            console.log(`Artist: ${element.artists[0].name}`);
+            console.log(`Song: ${songName}`);
+            console.log(`Spotify Preview Link: ${element.preview_url}`);
+            console.log(`Album: ${element.album.name}`);
+        })
+    })
+};
+
+//get movie function 
+
+function getMovie(movieName) {
+    axios.get(`http://omdapi.com/?t=${movieName}@apikey=PUT KEY IN`).then
+        (function (movie) {
+            console.log("");
+            console.log(`Title: ${movie.data.Title}`);
+            console.log(`Released: ${movie.data.Year}`);
+            console.log(`IMDB rating: ${movie.data.Ratings[0].Value}`);
+            console.log(`Rotten tomatoes rating: ${movie.data.Ratings[1].Value}`);
+            console.log(`Produced in: ${movie.data.Country}`);
+            console.log(`Plot: ${movie.data.Plot}`);
+            console.log(`Starring: ${movie.data.Actors}`);
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
+};
